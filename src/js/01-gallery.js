@@ -5,8 +5,6 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 // Change code below this line
 
-const modal = require('simpleLightbox');
-
 console.log(galleryItems);
 const containerGalary = document.querySelector('.gallery');
 
@@ -25,9 +23,9 @@ function createMarkup(arr) {
     .join('');
 }
 
-// const modal = new SimpleLightbox('.gallery a', {
-//   captionsData: 'alt',
-//   captionDelay: 250,
-//   close: false,
-//   enableKeyboard: true,
-// });
+const modal = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+  close: false,
+  enableKeyboard: true,
+});
