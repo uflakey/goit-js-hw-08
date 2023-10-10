@@ -7,3 +7,6 @@ const button = document.querySelector('button');
 
 form.addEventListener(input, onInputForm);
 button.addEventListener(submit, onSubmitForm);
+
+
+
