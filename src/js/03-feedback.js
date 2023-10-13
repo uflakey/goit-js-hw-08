@@ -20,6 +20,7 @@ function onFormSubmit(event) {
     alert('Усі поля повинні бути заповнені');
     return;
   }
+  console.log(userData);
   userData = {};
   form.reset();
   localStorage.removeItem('feedback-form-state');
