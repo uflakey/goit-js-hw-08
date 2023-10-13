@@ -1,29 +1,36 @@
 import throttle from 'lodash.throttle';
 
 const form = document.querySelector('.feedback-form');
-console.log(form);
 
-form.addEventListener('input', throttle(handlerInput, 500));
-form.addEventListener('submit', handlerSubmit);
+let userData = {};
+initForm();
 
-let data = {};
-console.log(data);
+form.addEventListener('input', throttle(onFormInput, 500));
+form.addEventListener('submit', onFormSubmit);
 
-function handlerInput(event) {
-  localStorage.setItem('feedback-form-state', data);
+function onFormInput(event) {
+  userData[event.target.name] = event.target.value;
+  localStorage.setItem('feedback-form-state', JSON.stringify(userData));
 }
 
-function handlerSubmit(event) {
+function onFormSubmit(event) {
   event.preventDefault();
-  const { email, message } = event.currentTarget.elements;
 
-  data = {
-    email: email.value,
-    message: message.value,
-  };
-  localStorage.getItem('feedback-form-state');
-  console.log(data);
-
-  event.currentTarget.reset();
+  if (!userData.email || !userData.message) {
+    alert('Усі поля повинні бути заповнені');
+    return;
+  }
+  userData = {};
+  form.reset();
   localStorage.removeItem('feedback-form-state');
+}
+
+function initForm() {
+  let savedData = localStorage.getItem('feedback-form-state');
+  if (savedData) {
+    savedData = JSON.parse(savedData);
+    form.email.value = savedData.email || '';
+    form.message.value = savedData.message || '';
+    userData = savedData;
+  }
 }
